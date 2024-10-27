@@ -1,0 +1,1 @@
+export type MyTupleToUnion<T> = T extends Array<infer R> ? R : T

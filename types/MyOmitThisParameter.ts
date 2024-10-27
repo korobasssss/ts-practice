@@ -1,1 +1,1 @@
-// export type MyOmitThisParameter<T extends Function> = 
+export type MyOmitThisParameter<T> = T extends (this: any, ...args: infer K) => infer R ? (...args: K) => R : T

@@ -1,0 +1,1 @@
+export type MyIsNever<T> = [T] extends [never] ? true : false;

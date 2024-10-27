@@ -1,10 +1,12 @@
 import { 
             MyConstructorParameters,
-            MyExclude, MyExtract, MyInstanceType, MyNonNullable, 
-            MyOmit, MyParameters, MyPartial, MyPick, 
+            MyExclude, MyExtract, MyFirstChar, MyFirstItem, MyInstanceType, MyLastChar, MyNonNullable, 
+            MyOmit, MyOmitThisParameter, MyParameters, MyPartial, MyPick, 
             MyReadonly, MyRecord, MyRequired,
-            MyReturnType, MyThisParameterType
+            MyReturnType, MyThisParameterType,
+            MyTupleToUnion
         } from "./types"
+import { MyIsNever } from "./types/MyIsNever"
 
 // 1. MyPartial
 type Foo1 = {
@@ -173,9 +175,42 @@ type B14 = MyThisParameterType<typeof Bar14> // unknown
 
 
 // 15. OmitThisParameter
-// function foo15(this: {a: string}) {}
+function foo15(this: {a: string}) {}
 // foo15() // Error
-// const bar15 = foo15.bind({a: 'BFE.dev'})
-// bar15() // OK
-// type Foo15 = (this: {a: string}) => string
-// type Bar15 = MyOmitThisParameter<Foo15> // () => string
+const bar15 = foo15.bind({a: 'BFE.dev'})
+bar15() // OK
+type Foo15 = (this: {a: string}) => string
+type Bar15 = MyOmitThisParameter<Foo15> // () => string
+
+
+
+// 16. MyFirstChar
+type A16 = MyFirstChar<'BFE'> // 'B'
+type B16 = MyFirstChar<'dev'> // 'd'
+type C16 = MyFirstChar<''> // never
+
+
+
+// 17. MyLastChar
+type A17 = MyLastChar<'BFE'> // 'E'
+type B17 = MyLastChar<'dev'> // 'v'
+type C17 = MyLastChar<''> // never
+
+
+
+// 18. MyTupleToUnion
+type Foo18 = [string, number, boolean]
+type Bar18 = MyTupleToUnion<Foo18> // string | number | boolean
+
+
+
+// 19. MyFirstItem
+type A19 = MyFirstItem<[string, number, boolean]> // string
+type B19 = MyFirstItem<['B', 'F', 'E']> // 'B'
+
+
+
+// 20. MyIsNever
+type A20 = MyIsNever<never> // true
+type B20 = MyIsNever<string> // false
+type C20 = MyIsNever<undefined> // false
