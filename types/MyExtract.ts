@@ -1,0 +1,1 @@
+export type MyExtract<T extends unknown, K extends unknown> = T extends K ? T : never 

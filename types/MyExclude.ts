@@ -1,0 +1,1 @@
+export type MyExclude<T extends unknown, K extends unknown> = T extends K ? never : T

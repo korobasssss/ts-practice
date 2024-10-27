@@ -1,0 +1,1 @@
+export type MyNonNullable<T extends unknown> = T extends null | undefined ? never : T

@@ -1,0 +1,1 @@
+export type MyInstanceType<T extends new (...args: any[]) => unknown> = T extends new (...args: any[]) => infer R ? R : never

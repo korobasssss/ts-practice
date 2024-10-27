@@ -1,0 +1,1 @@
+// export type MyOmitThisParameter<T extends Function> = 

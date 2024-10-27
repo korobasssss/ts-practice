@@ -1,0 +1,1 @@
+export type MyThisParameterType<T extends (this: any) => unknown> = T extends (this: infer K) => unknown ? K : never
